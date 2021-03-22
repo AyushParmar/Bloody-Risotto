@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Foreground
+  - Player
+  - Background
+  - Waypoints
+  - Environment
+  - Enemy
+  - Hazards
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 236741457
+    locked: 0
+  - name: Environment
+    uniqueID: 183686295
+    locked: 0
+  - name: Water
+    uniqueID: 1036295655
+    locked: 0
+  - name: Hazards
+    uniqueID: 21668355
+    locked: 0
+  - name: Waypoints
+    uniqueID: 1630186687
+    locked: 0
+  - name: Player
+    uniqueID: 3083936613
+    locked: 0
+  - name: Foreground
+    uniqueID: 3933462495
+    locked: 0
