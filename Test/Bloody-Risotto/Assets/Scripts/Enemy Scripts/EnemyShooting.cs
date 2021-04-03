@@ -30,6 +30,8 @@ public class EnemyShooting : MonoBehaviour
     private bool DetectionRange()
     {
         proximity = Physics2D.Raycast(enemyCollider.bounds.center, transform.right, 7.5f, playerLayerMask);
+        if(proximity.collider != null)
+        Debug.Log("IS ALERTED");
         return proximity.collider != null;
     }
     public IEnumerator EnemyShoot()
@@ -37,7 +39,6 @@ public class EnemyShooting : MonoBehaviour
         if(DetectionRange())
         {
             isAlert = true;
-            Debug.Log("IS ALERTED");
         }
         if(isAlert)
         {
