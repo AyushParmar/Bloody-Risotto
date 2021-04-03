@@ -9,12 +9,13 @@ public class GeneralBullet : MonoBehaviour
     public int damage = 25;
 
     [SerializeField] float fireSpeed = 15f;
-    [SerializeField] float fireVariation;
+    //[SerializeField] float fireVariation;
 
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         rigid.velocity = new Vector2(transform.right.x, 0) * fireSpeed;
+        Destroy(gameObject, 10f);
 
     }
     private void OnTriggerEnter2D(Collider2D collision)

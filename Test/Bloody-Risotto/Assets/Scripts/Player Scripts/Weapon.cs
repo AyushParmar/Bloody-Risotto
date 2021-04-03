@@ -6,7 +6,7 @@ public class Weapon: MonoBehaviour
 {
     public Transform firePoint;
     public int Damage=5;
-    private float fireTime=0.2f;
+    private float fireTime=0.1f;
     public GameObject bulletPrefab;
     public GameObject hitEffect;
 
