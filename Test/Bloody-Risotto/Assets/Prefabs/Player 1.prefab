@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 3055131384081587259}
   m_Layer: 9
   m_Name: Player 1
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -206,7 +206,6 @@ MonoBehaviour:
     type: 3}
   hitEffect: {fileID: 4334878903558955883, guid: e9db8e3ce63004d4e8f204dac436b93d,
     type: 3}
-  fireRate: 0
 --- !u!114 &7404744556264585387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,7 +221,6 @@ MonoBehaviour:
   health: 100
   deathEffect: {fileID: 6730722057876844824, guid: 55d719b3952c4cf419d59f475fc33b40,
     type: 3}
-  anim: {fileID: 0}
 --- !u!70 &3055131384081587259
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -98,7 +98,7 @@ Rigidbody2D:
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0
+  m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -147,5 +147,5 @@ MonoBehaviour:
   hitEffect: {fileID: 4334878903558955883, guid: e9db8e3ce63004d4e8f204dac436b93d,
     type: 3}
   damage: 25
-  fireSpeed: 25
+  fireSpeed: 15
   fireVariation: 0

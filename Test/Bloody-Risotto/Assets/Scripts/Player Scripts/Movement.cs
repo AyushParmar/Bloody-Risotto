@@ -19,8 +19,6 @@ public class Movement : MonoBehaviour
     Animator anim;
     CapsuleCollider2D playerCollider;
 
-    public static bool isAlive;
-
     bool canGrab;
     bool isGrabbing;
     bool lookingRight = true;
@@ -57,7 +55,6 @@ public class Movement : MonoBehaviour
             WallJump();
         }
         Flip();
-        Debug.Log(isAlive);
     }
 
     private void FixedUpdate()
