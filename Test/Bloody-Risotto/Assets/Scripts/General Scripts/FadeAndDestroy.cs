@@ -1,11 +1,11 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FadeAndDestroy : MonoBehaviour
 {
     SpriteRenderer render;
     [SerializeField]float delay = 1f;
     float ft = 1f;
+    bool destroyCalled;
     void Start()
     {
         render = GetComponent<SpriteRenderer>();
@@ -13,9 +13,10 @@ public class FadeAndDestroy : MonoBehaviour
     }
     void Update()
     {
-        if (render.color.a <= 0f)
+        if (render.color.a <= 0f&&!destroyCalled)
         {
             Destroy(gameObject, 1f);
+            destroyCalled = true;
         }
     }
 

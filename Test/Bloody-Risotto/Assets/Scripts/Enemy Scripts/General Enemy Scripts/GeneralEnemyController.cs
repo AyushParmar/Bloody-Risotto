@@ -13,6 +13,8 @@ public class GeneralEnemyController : MonoBehaviour
     [SerializeField] float stationaryTime = 7f;
     [SerializeField] bool lookingRight;
 
+    public static bool staticCheck;
+
     public GameObject bulletPrefab;
     public GameObject exclamation;
     public Transform firePoint;
@@ -23,6 +25,7 @@ public class GeneralEnemyController : MonoBehaviour
     bool isAlive;
     bool isAlert = false;
     bool showAlert = true;
+    bool canShoot = true;
 
     HealthManagement health;
     Transform playerTransform;
@@ -32,9 +35,7 @@ public class GeneralEnemyController : MonoBehaviour
     {
         //rend = GetComponent<Renderer>();
         lookingRight = gameObject.transform.rotation.y == 0 ? true : false;
-
         InvokeRepeating("Flip", 0f, stationaryTime);
-        StartCoroutine(Shoot());
 
         health = GetComponent<HealthManagement>();
         hp = health.health; 
@@ -49,7 +50,12 @@ public class GeneralEnemyController : MonoBehaviour
             Alert();
             CheckHit();
             LookAtAfterAlert();
+            if(canShoot)
+            {
+                StartCoroutine(Shoot());
+            }
             Debug.Log(isAlive);
+            Debug.Log(gameObject.name + staticCheck);
         }
     }
 
@@ -95,8 +101,6 @@ public class GeneralEnemyController : MonoBehaviour
         return proximity.collider != null;
     }
 
-
-
     private void Alert()
     {
         if (DetectionRange() && !isAlert)
@@ -112,23 +116,20 @@ public class GeneralEnemyController : MonoBehaviour
 
     }
 
-    public IEnumerator Shoot()
+    IEnumerator Shoot()
     {
-        while(true)
+        if(!isAlert)
         {
-            if (!isAlert)
-            {
-                yield return null;
-            }
-            else if (isAlert)
-            {
-                StopCoroutine(Shoot());
-                yield return new WaitForSeconds(fireRate);
-                anim.SetBool("isShooting", true);
-                yield return new WaitForSeconds(fireOffset);
-                Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-                anim.SetBool("isShooting", false);
-            }
+            yield return null;
+        }
+        else if(isAlert)
+        {
+            canShoot = false;
+            yield return new WaitForSeconds(fireRate);
+            anim.SetTrigger("isShooting");
+            yield return new WaitForSeconds(fireOffset);
+            Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            canShoot = true;
         }
     }
 
