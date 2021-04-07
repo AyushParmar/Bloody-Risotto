@@ -6,6 +6,16 @@ public class HealthManagement : MonoBehaviour
 {
     public int health = 10;
     public GameObject deathEffect;
+    public bool dieCalled;
+    
+    private Animator anim;
+    private bool gotAnimator;
+
+    private void Start()
+    {
+        gotAnimator = TryGetComponent<Animator>(out anim);
+    }
+
     public void TakeDamage(int damage)
     {
         health -= damage;
@@ -18,8 +28,16 @@ public class HealthManagement : MonoBehaviour
     }
     void Die()
     {
-        GameObject newExplosion=Instantiate(deathEffect, transform.position, Quaternion.identity);
-        Destroy(gameObject);
-        Destroy(newExplosion, 0.725f);
+        if (gotAnimator)
+        {
+            dieCalled = true;
+            anim.SetTrigger("isDead");
+        }
+        else
+        {
+            GameObject newExplosion=Instantiate(deathEffect, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+            Destroy(newExplosion, 0.725f);
+        }
     }
 }
