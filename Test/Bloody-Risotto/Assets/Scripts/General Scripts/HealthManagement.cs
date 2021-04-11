@@ -6,7 +6,7 @@ public class HealthManagement : MonoBehaviour
 {
     public int health = 10;
     public GameObject deathEffect;
-    public bool dieCalled;
+    public bool dieCalled=false;
     
     private Animator anim;
     private bool gotAnimator;
@@ -31,7 +31,6 @@ public class HealthManagement : MonoBehaviour
         if (gotAnimator)
         {
             dieCalled = true;
-            anim.SetTrigger("isDead");
         }
         else
         {

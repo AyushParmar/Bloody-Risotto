@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7346224916587781617}
   - component: {fileID: 7346224916587781616}
-  - component: {fileID: 7346224916587781519}
+  - component: {fileID: 1573838700856432652}
   m_Layer: 5
   m_Name: Exclamation
   m_TagString: Untagged
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7346224916587781519
+--- !u!114 &1573838700856432652
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -94,4 +94,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24c554bdfb78d3c4cadb98592f9a4d59, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delay: 1

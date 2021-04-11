@@ -13,21 +13,17 @@ public class GeneralEnemyController : MonoBehaviour
     [SerializeField] float stationaryTime = 7f;
     [SerializeField] bool lookingRight;
 
-    public static bool staticCheck;
-
     public GameObject bulletPrefab;
     public GameObject exclamation;
     public Transform firePoint;
     //public Renderer rend;
-
-    public static bool groupAlert;
-
-    bool isAlive;
+    
     bool isAlert = false;
     bool showAlert = true;
     bool canShoot = true;
 
-    HealthManagement health;
+    HitAndDeath hit;
+    FadeAndDestroy fade;
     Transform playerTransform;
     RaycastHit2D proximity;
 
@@ -36,42 +32,32 @@ public class GeneralEnemyController : MonoBehaviour
         //rend = GetComponent<Renderer>();
         lookingRight = gameObject.transform.rotation.y == 0 ? true : false;
         InvokeRepeating("Flip", 0f, stationaryTime);
-
-        health = GetComponent<HealthManagement>();
-        hp = health.health; 
-
+        hit = gameObject.GetComponent<HitAndDeath>();
+        fade = gameObject.GetComponent<FadeAndDestroy>();
         playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
     void Update()
     {
-        isAlive = !health.dieCalled;
-        if (isAlive)
+        if(!hit.dead)
         {
             Alert();
-            CheckHit();
             LookAtAfterAlert();
             if(canShoot)
             {
                 StartCoroutine(Shoot());
             }
-            Debug.Log(isAlive);
-            Debug.Log(gameObject.name + staticCheck);
+        }
+        if(hit.dead)
+        {
+          StartCoroutine(fade.FadeOut(gameObject));
         }
     }
 
-    private void CheckHit()
-    {
-        anim.SetBool("isHurt", false);
-        if(health.health<hp)
-        {
-            hp = health.health;
-            anim.SetBool("isHurt",true);
-        }
-    }
+    
 
     private void Flip()
     {
-        if (!isAlert)
+        if (!isAlert&&!hit.dead)
         {
             transform.Rotate(0, 180f, 0);
             lookingRight = !lookingRight;
@@ -122,10 +108,11 @@ public class GeneralEnemyController : MonoBehaviour
         {
             yield return null;
         }
-        else if(isAlert)
+        else if(isAlert&&!hit.dead)
         {
             canShoot = false;
             yield return new WaitForSeconds(fireRate);
+            if(!hit.dead)
             anim.SetTrigger("isShooting");
             yield return new WaitForSeconds(fireOffset);
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);

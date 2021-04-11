@@ -1,30 +1,46 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class FadeAndDestroy : MonoBehaviour
 {
-    SpriteRenderer render;
-    [SerializeField]float delay = 1f;
-    float ft = 1f;
-    bool destroyCalled;
-    void Start()
+    private void Start()
     {
-        render = GetComponent<SpriteRenderer>();
-        InvokeRepeating("FadeOut",delay,0.005f);
-    }
-    void Update()
-    {
-        if (render.color.a <= 0f&&!destroyCalled)
+        if (gameObject.name.Contains("Exclamation"))
         {
-            Destroy(gameObject, 1f);
-            destroyCalled = true;
+            StartCoroutine(FadeOut(gameObject));
         }
     }
 
-    private void FadeOut()
+    public IEnumerator FadeOut(GameObject toFade)
     {
-        Color c = render.color;
-        c.a = ft;
-        render.color = c;
-        ft -= 0.005f;
+        SpriteRenderer render;
+        render = toFade.GetComponent<SpriteRenderer>();
+        float ft = 1f;
+        bool pause = true;
+        bool destroyCalled = false;
+
+        while (true)
+        {
+            if(pause)
+            {
+                pause = false;
+                yield return new WaitForSeconds(1f);
+            }
+            yield return new WaitForSeconds(0.005f);
+            Color c = render.color;
+            c.a = ft;
+            render.color = c;
+            ft -= 0.005f;
+            if (render.color.a <= 0f && !destroyCalled)
+            {
+                Destroy(gameObject, 1f);
+                destroyCalled = true;
+                yield return null ;
+            }
+            if (destroyCalled)
+            {
+                yield return null;
+            }
+        }
     }
 }
